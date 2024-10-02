@@ -26,10 +26,10 @@ def root():
                 "HTTP_method": "PUT: /updateData",
                 "description": "Appends the new data to train on",
                 "exampleInput": {
-                    "data": """
-                    1\t2\t3\t121412
-                    2\t4\t5\t124151
-                    """
+                    "user_id": 1,
+                    "item_id": 2,
+                    "score": 5.0,
+                    "timestamp": 12345
                 }
             },
             {
