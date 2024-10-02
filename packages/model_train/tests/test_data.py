@@ -1,5 +1,3 @@
-# tests/test_data.py
-
 import unittest
 from surprise import Dataset, Reader
 from surprise.model_selection import train_test_split

@@ -1,5 +1,3 @@
-# tests/test_cluster_rec.py
-
 import unittest
 from surprise import Dataset
 from surprise.model_selection import train_test_split

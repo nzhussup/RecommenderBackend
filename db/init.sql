@@ -2,9 +2,9 @@ CREATE TABLE IF NOT EXISTS users (
     userID SERIAL PRIMARY KEY,
     firstName VARCHAR(50),
     lastName VARCHAR(50),
-    email VARCHAR(50),
+    email VARCHAR(50) UNIQUE,
     password VARCHAR(150) NOT NULL,
-    username VARCHAR(50) NOT NULL
+    username VARCHAR(50) UNIQUE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS items (
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS items (
     userID INT,
     title TEXT NOT NULL,
     description TEXT,
-    score FLOAT(5)
+    score FLOAT(5),
     FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
 );
 

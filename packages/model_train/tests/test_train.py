@@ -1,5 +1,3 @@
-# tests/test_train.py
-
 import unittest
 from model_cicd_nzhussup.training.train import train
 from model_cicd_nzhussup import config
