@@ -1,0 +1,35 @@
+[project]
+name = "model_cicd_nzhussup"
+version = "0.0.1"
+authors = [
+  { name="Nurzhanat Zhussup", email="nurzhanat2002@gmail.com" },
+]
+description = "A CI/CD package for the Clustering-Based SVD++ algorithm"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  'scikit-surprise==1.1.4',
+  'numpy<2',
+  'scikit-learn==1.5.2',
+  'pytest==8.3.3',
+  'pandas==2.2.3'
+]
+
+
+[project.urls]
+Homepage = "https://github.com/nzhussup/"
+
+[tool.setuptools.package-data]
+model_cicd_nzhussup = [
+    "models/*.pkl",
+    "data/*.data",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

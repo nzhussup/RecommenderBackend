@@ -1,0 +1,8 @@
+include README.md
+include LICENSE
+include model_cicd_nzhussup/data/u.data
+include model_cicd_nzhussup/models/model.pkl
+recursive-include model_cicd_nzhussup/modules *
+recursive-include model_cicd_nzhussup/training *
+recursive-include model_cicd_nzhussup/controllers *
+
