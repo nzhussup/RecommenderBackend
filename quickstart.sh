@@ -10,6 +10,6 @@ echo "starting the pods"
 kubectl apply -f api-deployment.yml
 kubectl apply -f db-deployment.yml
 kubectl apply -f model-api-deployment.yml
-
+kubectl apply -f java-api-deployment.yml
 
 
