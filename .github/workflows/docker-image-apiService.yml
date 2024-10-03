@@ -1,0 +1,87 @@
+name: Python API Testing and Docker Build/Push CI
+
+on:
+  push:
+    paths:
+      - "services/data_management_service/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        working-directory: services/data_management_service
+        run: |
+          pip install --no-cache-dir --upgrade -r requirements.txt wheel
+
+      - name: Install Docker
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker.io
+          sudo systemctl start docker
+          sudo systemctl enable docker
+
+      - name: Pull Docker image
+        run: |
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/data_management:latest
+
+      - name: Run Docker container
+        run: |
+          docker run --name data_management_test -d -p 4444:4444 ${{ secrets.DOCKERHUB_USERNAME }}/data_management:latest
+
+      - name: Wait for the service to start
+        run: |
+          for i in {1..10}; do
+            if curl -s -o /dev/null -w "%{http_code}" http://localhost:4444/; then
+              echo "Service is up!"
+              break
+            fi
+            echo "Waiting for service..."
+            sleep 5
+          done
+
+      - name: Run tests
+        run: |
+          pip install requests  # Install the requests library if it's not in your requirements
+          pytest tests/test_api.py  # Adjust the path to your test file as needed
+
+      - name: Stop and remove container
+        run: |
+          docker stop data_management_test
+          docker rm data_management_test
+
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Docker image
+        working-directory: services/data_management_service
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/data_management:latest .
+
+      - name: Push Docker image
+        working-directory: services/data_management_service
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/data_management:latest
