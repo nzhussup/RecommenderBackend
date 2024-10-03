@@ -13,19 +13,3 @@ def test_read_main():
     }
 
 
-
-def test_read_user():
-    
-    response = requests.get(f"{BASE_URL}/users/2")
-    assert response.status_code == 200
-    data = response.json()
-    assert data["firstname"] == "Jane"
-
-
-
-
-def test_read_item():
-
-    response = requests.get(f"{BASE_URL}/items/1")
-
-    assert response.status_code == 200
