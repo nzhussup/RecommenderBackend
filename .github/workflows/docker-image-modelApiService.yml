@@ -1,4 +1,4 @@
-name: Model API Service Docker Image CI
+name: Build and Push Docker Image
 
 on:
   push:
@@ -6,26 +6,29 @@ on:
       - 'services/model_api_service/**'
 
 jobs:
-  docker:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      -
-        name: Login to Docker Hub
-        uses: docker/login-action@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push
-        uses: docker/build-push-action@v6
-        with:
-          context: services/model_api_service
-          file: services/model_api_service/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/model_api:latest
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Docker image
+        working-directory: services/model_api_service
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERANE }}/model_api:latest .
+
+      - name: Push Docker image
+        working-directory: services/model_api_service
+        run: |
+          docker push ${{ secrets.DOCKER_USERANE }}/model_api:latest
+
