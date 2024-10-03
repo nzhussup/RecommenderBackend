@@ -9,6 +9,7 @@ public class RootController {
 
     @GetMapping("/")
     public String root() {
-        return "Hello World!";
+        return "Welcome to the Java Management Service!" + "\n" +
+                "Author: Nurzhanat Zhussup";
     }
 }

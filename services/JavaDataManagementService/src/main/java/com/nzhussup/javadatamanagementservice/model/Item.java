@@ -2,7 +2,6 @@ package com.nzhussup.javadatamanagementservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Data
@@ -18,6 +17,10 @@ public class Item {
 
     public Item() {
         this(0, 0, "default", "default", 0);
+    }
+
+    public Item(int userid, String title, String description, double score) {
+        this(0, userid, title, description, score);
     }
 
     @Override

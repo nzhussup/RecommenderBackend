@@ -21,6 +21,11 @@ public class User {
         this(0, "default", "default", "default", "default", "default");
     }
 
+    public User(String firstname, String lastname, String email, String password) {
+        this(0, "default", "default", "default", "default", "default");
+    }
+
+
     @Override
     public String toString() {
         return "User{" +
