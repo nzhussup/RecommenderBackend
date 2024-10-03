@@ -29,3 +29,14 @@ minikube service api-serivce --url
 ```bash
 minikube service model-api-serivce --url
 ```
+
+Packages:
+
+- model_cicd
+
+Services:
+
+- model_api_service
+- data_management_service:
+  - Python version
+  - Java version
