@@ -25,7 +25,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: ./services/model_api_service
-          file: ./services/model_api_service/Dockerfile
+          context: services/model_api_service
+          file: services/model_api_service/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/model_api:latest
