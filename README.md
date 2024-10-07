@@ -139,3 +139,8 @@ The pipeline is triggered on new commits to the corresponding folder in the serv
     minikube service model-api-service --url
     minikube service java-api-service --url
    ```
+
+   To get the api documentations:
+
+   - Python-based API: <URL>/docs
+   - Java-basedAPI: <URL>/swagger-ui/index.html
