@@ -6,7 +6,6 @@ This is a backend project as an extension for a [Clustering-Based-SVDpp algorith
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-![API](https://img.shields.io/badge/API-API-blue?style=for-the-badge)
 ![REST API](https://img.shields.io/badge/REST_API-005571?style=for-the-badge)
 ![Microservices](https://img.shields.io/badge/Microservices-0078D7?style=for-the-badge)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
@@ -25,10 +24,6 @@ This is a backend project as an extension for a [Clustering-Based-SVDpp algorith
 ## Project Overview
 
 This project demonstrates the use of a microservices architecture to build scalable and modular applications, with services written in Python and Java. Each service is containerized using Docker, orchestrated with Kubernetes, and designed to interact with other services seamlessly. The project also includes a CI/CD pipeline for automated testing, building, and deployment using GitHub Actions.
-
-## Project Keywords
-
-Java, Python, API, REST API, Microservices, Kubernetes, Docker, CI/CD, GitHub Actions, Python Packaging, FastAPI, Spring Boot, Spring Web, SpringJDBC, PostgreSQL, Pytest, JUnit.
 
 ## Features
 
