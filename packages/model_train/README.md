@@ -1,6 +1,5 @@
 # Model CICD Nzhussup
 
-
 ## Overview
 
 **Model CICD Nzhussup** is a Python package designed for building and managing Clustering Based SVDpp algorithm.
