@@ -1,0 +1,58 @@
+name: Model Package Testing and TestPyPI Build/Push CI
+
+on:
+  push:
+    paths:
+      - "packages/model_train/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        working-directory: packages/model_train
+        run: |
+          python3 -m pip install --upgrade build
+          python3 -m build
+          pip3 install .
+
+      - name: Run tests
+        working-directory: packages/model_train
+        run: |
+          pytest tests
+
+  # build:
+  #   runs-on: ubuntu-latest
+  #   needs: test
+
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v2
+
+  #     - name: Log in to Docker Hub
+  #       uses: docker/login-action@v2
+  #       with:
+  #         username: ${{ secrets.DOCKERHUB_USERNAME }}
+  #         password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  #     - name: Build Docker image
+  #       working-directory: services/model_api_service
+  #       run: |
+  #         docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/model_api:latest .
+
+  #     - name: Push Docker image
+  #       working-directory: services/model_api_service
+  #       run: |
+  #         docker push ${{ secrets.DOCKERHUB_USERNAME }}/model_api:latest
