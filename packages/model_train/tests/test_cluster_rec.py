@@ -2,12 +2,12 @@ import unittest
 from surprise import Dataset
 from surprise.model_selection import train_test_split
 from model_cicd_nzhussup.modules.cluster_rec import CB_SVDpp
-from model_cicd_nzhussup import config
+from model_cicd_nzhussup import config, controller
 
 class TestCB_SVDpp(unittest.TestCase):
 
     def setUp(self):
-        self.data = Dataset.load_builtin('ml-100k')
+        self.data = controller.Controller.get_data()
         self.trainset, _ = train_test_split(self.data, test_size=0.2)
         self.model = CB_SVDpp(num_clusters=config.NUM_CLUSTER, 
                                alpha=config.ALPHA, 
