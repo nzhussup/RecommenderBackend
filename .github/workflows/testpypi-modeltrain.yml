@@ -1,4 +1,4 @@
-name: Model Package Testing and TestPyPI Build/Push CI
+name: Model Package Testing, Build/Push CI
 
 on:
   push:
@@ -6,9 +6,8 @@ on:
       - "packages/model_train/**"
 
 jobs:
-  test:
+  setup:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -18,11 +17,15 @@ jobs:
         with:
           python-version: "3.11"
 
+  test:
+    needs: setup
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Install dependencies
         working-directory: packages/model_train
         run: |
           python3 -m pip install --upgrade build
-          python3 -m build
           pip3 install .
 
       - name: Run tests
@@ -31,22 +34,25 @@ jobs:
           pytest tests
 
   build-and-publish:
-    needs: test
+    needs: [setup, test]
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.11"
-
       - name: Install build dependencies
         working-directory: packages/model_train
         run: |
           python3 -m pip install --upgrade build twine
+
+      - name: Create .pypirc file
+        run: |
+          echo "[distutils]" > ~/.pypirc
+          echo "index-servers =" >> ~/.pypirc
+          echo "    testpypi" >> ~/.pypirc
+          echo "" >> ~/.pypirc
+          echo "[testpypi]" >> ~/.pypirc
+          echo "repository = https://test.pypi.org/legacy/" >> ~/.pypirc
+          echo "username = __token__" >> ~/.pypirc
+          echo "password = ${{ secrets.TESTPYPI_TOKEN }}" >> ~/.pypirc
 
       - name: Build the package
         working-directory: packages/model_train
@@ -55,8 +61,5 @@ jobs:
 
       - name: Publish package to TestPyPI
         working-directory: packages/model_train
-        env:
-          TWINE_USERNAME: "__token__"
-          TWINE_PASSWORD: ${{ secrets.TESTPYPI_TOKEN }}
         run: |
           python3 -m twine upload --repository testpypi dist/*
