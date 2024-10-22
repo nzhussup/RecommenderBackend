@@ -1,6 +1,6 @@
 # Recommender Backend Project
 
-This is a backend project as an extension for a [Clustering-Based-SVDpp algorithm](https://github.com/nzhussup/Clustering-Based-SVDpp). In this project I implement my knowledge in code packaging, API development, microservices, containerization, container orchestration and CI/CD
+This is a backend project as an extension for a [Clustering-Based-SVDpp algorithm](https://github.com/nzhussup/Clustering-Based-SVDpp). In this project I implement my knowledge in code packaging, API development, API security, microservices, containerization, container orchestration and CI/CD
 
 ## Technologies Used
 
@@ -29,6 +29,7 @@ This project demonstrates the use of a microservices architecture to build scala
 
 - **Python-based microservices** for data processing and machine learning model management.
 - **Java-based microservices** for handling user and item data with a well-defined API.
+- **JWT Security / Role-based access control** for enhanced security in accessing the data
 - **Kubernetes deployment** configurations for scalability and service orchestration.
 - **Docker support** for containerization of all microservices.
 - **GitHub Actions CI/CD pipeline** for automated builds and deployments.
@@ -94,7 +95,7 @@ The pipeline is triggered on new commits to the corresponding folder in the serv
 
 4. **Microservices (`services/`)**:
 
-   - **JavaDataManagementService**: Java-based REST API for user and item data management.
+   - **JavaDataManagementService**: Java-based REST API for user and item data management with implemented security features.
    - **data_management_service**: Python-based API built with FastAPI for CRUD operations on data.
    - **model_api_service**: Python-based API for serving trained machine learning models.
 
@@ -146,3 +147,28 @@ The pipeline is triggered on new commits to the corresponding folder in the serv
 
    - Python-based API: <URL>/docs
    - Java-basedAPI: <URL>/swagger-ui/index.html
+
+4. **Using Java API**
+
+   The initial admin user has following credentials:
+
+   ```python
+   {
+      "email": "test@test.com",
+      "password": "test"
+   }
+   ```
+
+   access the /auth/login endpoint with POST method posting credentials to get the access token. After that use access token in headers to access /public and /admin endpoints.
+
+   to register a user use /auth/register endpoint providing:
+
+   ```python
+   {
+      "email": user_email,
+      "password": password
+   }
+   ```
+   a default role for registered users is "ROLE_USER". "ROLE_USER" can only access /public endpoint.
+
+   the swagger-ui documentation is always available under the endpoint /swagger-ui/index.html without credentials
