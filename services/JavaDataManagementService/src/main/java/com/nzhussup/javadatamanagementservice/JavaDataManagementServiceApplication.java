@@ -1,5 +1,6 @@
 package com.nzhussup.javadatamanagementservice;
 
+import com.nzhussup.javadatamanagementservice.service.PasswordUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,7 +9,6 @@ public class JavaDataManagementServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(JavaDataManagementServiceApplication.class, args);
-
     }
 
 }

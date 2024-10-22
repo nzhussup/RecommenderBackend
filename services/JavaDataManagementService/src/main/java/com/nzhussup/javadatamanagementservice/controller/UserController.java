@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("public/users")
 public class UserController {
 
 
@@ -27,7 +28,7 @@ public class UserController {
         return response;
     }
 
-    @GetMapping("/users/")
+    @GetMapping("/")
     public String root() {
         return "User root";
     }
@@ -43,7 +44,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/users/add")
+    @PostMapping("/add")
     public Response<User> addUser(User user) {
 
         try {
@@ -57,7 +58,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/users/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public Response<User> deleteItemById(@PathVariable int id) {
         try {
             userService.deleteById(id);
@@ -69,7 +70,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("/users/update")
+    @PutMapping("/update")
     public Response<User> updateItem(User user) {
         try {
             userService.update(user);
@@ -81,7 +82,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public Response<User> getItemById(@PathVariable int id) {
         try {
             response.setObj(userService.findById(id));
@@ -92,7 +93,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/users/last")
+    @GetMapping("/last")
     public Response<User> getLastItem() {
         try {
             response.setObj(userService.findLastEntry());

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("public/items")
 public class ItemController {
 
     @Autowired
@@ -23,12 +24,12 @@ public class ItemController {
         return response;
     }
 
-    @GetMapping("/items")
+    @GetMapping("/")
     public String root() {
         return "Item root";
     }
 
-    @GetMapping("/items/all")
+    @GetMapping("/all")
     public Response<List<Item>> getAllItems() {
         try {
             response.setMessage("Successfully retrieved all items");
@@ -39,7 +40,7 @@ public class ItemController {
         }
     }
 
-    @PostMapping("/items/add")
+    @PostMapping("/add")
     public Response<Item> addItem(Item item) {
 
         try {
@@ -53,7 +54,7 @@ public class ItemController {
         }
     }
 
-    @DeleteMapping("/items/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public Response<Item> deleteItemById(@PathVariable int id) {
         try {
             itemService.deleteById(id);
@@ -65,7 +66,7 @@ public class ItemController {
         }
     }
 
-    @PutMapping("/items/update")
+    @PutMapping("/update")
     public Response<Item> updateItem(Item item) {
         try {
             itemService.update(item);
@@ -77,7 +78,7 @@ public class ItemController {
         }
     }
 
-    @GetMapping("/items/{id}")
+    @GetMapping("/{id}")
     public Response<Item> getItemById(@PathVariable int id) {
         try {
             response.setObj(itemService.findById(id));
@@ -88,7 +89,7 @@ public class ItemController {
         }
     }
 
-    @GetMapping("/items/last")
+    @GetMapping("/last")
     public Response<Item> getLastItem() {
         try {
             response.setObj(itemService.findLastEntry());

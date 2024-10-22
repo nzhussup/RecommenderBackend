@@ -1,8 +1,9 @@
 package com.nzhussup.javadatamanagementservice.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.nzhussup.javadatamanagementservice.model.User;
+import com.nzhussup.javadatamanagementservice.security.UserPrincipal;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class RootController {

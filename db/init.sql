@@ -16,6 +16,13 @@ CREATE TABLE IF NOT EXISTS items (
     FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS auth (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) UNIQUE,
+    password VARCHAR(255),
+    role VARCHAR(10)
+);
+
 INSERT INTO users (firstName, lastName, email, password, username) VALUES
 ('John', 'Doe', 'john.doe@example.com', 'password123', 'johndoe'),
 ('Jane', 'Smith', 'jane.smith@example.com', 'password456', 'janesmith'),
@@ -38,102 +45,10 @@ INSERT INTO items (userID, title, description, score) VALUES
 (1, 'Item 7', 'Description for item 7', 3.5),
 (1, 'Item 8', 'Description for item 8', 4.1),
 (1, 'Item 9', 'Description for item 9', 3.9),
-(1, 'Item 10', 'Description for item 10', 4.7),
+(1, 'Item 10', 'Description for item 10', 4.7);
 
-(2, 'Item 11', 'Description for item 11', 4.4),
-(2, 'Item 12', 'Description for item 12', 3.2),
-(2, 'Item 13', 'Description for item 13', 4.0),
-(2, 'Item 14', 'Description for item 14', 5.0),
-(2, 'Item 15', 'Description for item 15', 3.1),
-(2, 'Item 16', 'Description for item 16', 4.3),
-(2, 'Item 17', 'Description for item 17', 4.6),
-(2, 'Item 18', 'Description for item 18', 2.8),
-(2, 'Item 19', 'Description for item 19', 4.2),
-(2, 'Item 20', 'Description for item 20', 4.5),
+INSERT INTO auth (email, password, role) VALUES
+('test@test.com', '$2a$10$4wNSo/r23HUtFGQ6q7ABYeu/DPozGzfwSt.d1EgYjwlsCLWiBpYN2', 'ROLE_ADMIN');
 
-(3, 'Item 21', 'Description for item 21', 3.7),
-(3, 'Item 22', 'Description for item 22', 5.0),
-(3, 'Item 23', 'Description for item 23', 4.4),
-(3, 'Item 24', 'Description for item 24', 3.9),
-(3, 'Item 25', 'Description for item 25', 4.1),
-(3, 'Item 26', 'Description for item 26', 4.8),
-(3, 'Item 27', 'Description for item 27', 3.3),
-(3, 'Item 28', 'Description for item 28', 4.0),
-(3, 'Item 29', 'Description for item 29', 4.9),
-(3, 'Item 30', 'Description for item 30', 3.6),
 
-(4, 'Item 31', 'Description for item 31', 4.1),
-(4, 'Item 32', 'Description for item 32', 2.9),
-(4, 'Item 33', 'Description for item 33', 4.6),
-(4, 'Item 34', 'Description for item 34', 5.0),
-(4, 'Item 35', 'Description for item 35', 3.4),
-(4, 'Item 36', 'Description for item 36', 4.2),
-(4, 'Item 37', 'Description for item 37', 3.8),
-(4, 'Item 38', 'Description for item 38', 4.7),
-(4, 'Item 39', 'Description for item 39', 4.3),
-(4, 'Item 40', 'Description for item 40', 4.5),
-
-(5, 'Item 41', 'Description for item 41', 3.8),
-(5, 'Item 42', 'Description for item 42', 4.2),
-(5, 'Item 43', 'Description for item 43', 4.4),
-(5, 'Item 44', 'Description for item 44', 5.0),
-(5, 'Item 45', 'Description for item 45', 3.1),
-(5, 'Item 46', 'Description for item 46', 4.5),
-(5, 'Item 47', 'Description for item 47', 3.9),
-(5, 'Item 48', 'Description for item 48', 4.0),
-(5, 'Item 49', 'Description for item 49', 4.3),
-(5, 'Item 50', 'Description for item 50', 3.7),
-
-(6, 'Item 51', 'Description for item 51', 4.6),
-(6, 'Item 52', 'Description for item 52', 3.4),
-(6, 'Item 53', 'Description for item 53', 5.0),
-(6, 'Item 54', 'Description for item 54', 4.2),
-(6, 'Item 55', 'Description for item 55', 3.8),
-(6, 'Item 56', 'Description for item 56', 4.5),
-(6, 'Item 57', 'Description for item 57', 4.0),
-(6, 'Item 58', 'Description for item 58', 3.9),
-(6, 'Item 59', 'Description for item 59', 4.1),
-(6, 'Item 60', 'Description for item 60', 4.3),
-
-(7, 'Item 61', 'Description for item 61', 3.7),
-(7, 'Item 62', 'Description for item 62', 5.0),
-(7, 'Item 63', 'Description for item 63', 4.4),
-(7, 'Item 64', 'Description for item 64', 3.9),
-(7, 'Item 65', 'Description for item 65', 4.1),
-(7, 'Item 66', 'Description for item 66', 4.8),
-(7, 'Item 67', 'Description for item 67', 3.3),
-(7, 'Item 68', 'Description for item 68', 4.0),
-(7, 'Item 69', 'Description for item 69', 4.9),
-(7, 'Item 70', 'Description for item 70', 3.6),
-
-(8, 'Item 71', 'Description for item 71', 4.1),
-(8, 'Item 72', 'Description for item 72', 2.9),
-(8, 'Item 73', 'Description for item 73', 4.6),
-(8, 'Item 74', 'Description for item 74', 5.0),
-(8, 'Item 75', 'Description for item 75', 3.4),
-(8, 'Item 76', 'Description for item 76', 4.2),
-(8, 'Item 77', 'Description for item 77', 3.8),
-(8, 'Item 78', 'Description for item 78', 4.7),
-(8, 'Item 79', 'Description for item 79', 4.3),
-(8, 'Item 80', 'Description for item 80', 4.5),
-
-(9, 'Item 81', 'Description for item 81', 3.8),
-(9, 'Item 82', 'Description for item 82', 4.2),
-(9, 'Item 83', 'Description for item 83', 4.4),
-(9, 'Item 84', 'Description for item 84', 5.0),
-(9, 'Item 85', 'Description for item 85', 3.1),
-(9, 'Item 86', 'Description for item 86', 4.5),
-(9, 'Item 87', 'Description for item 87', 3.9),
-(9, 'Item 88', 'Description for item 88', 4.0),
-(9, 'Item 89', 'Description for item 89', 4.3),
-(9, 'Item 90', 'Description for item 90', 3.7),
-
-(10, 'Item 91', 'Description for item 91', 4.6),
-(10, 'Item 92', 'Description for item 92', 3.4),
-(10, 'Item 93', 'Description for item 93', 5.0),
-(10, 'Item 94', 'Description for item 94', 4.2),
-(10, 'Item 95', 'Description for item 95', 3.8),
-(10, 'Item 96', 'Description for item 96', 4.5),
-(10, 'Item 97', 'Description for item 97', 4.0),
-(10, 'Item 98', 'Description for item 98', 3.9);
 
