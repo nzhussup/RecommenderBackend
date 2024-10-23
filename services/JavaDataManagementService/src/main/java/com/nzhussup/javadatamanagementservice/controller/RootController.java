@@ -13,4 +13,9 @@ public class RootController {
         return "Welcome to the Java Management Service!" + "\n" +
                 "Author: Nurzhanat Zhussup";
     }
+
+    @GetMapping("/public")
+    public String publicRoot() {
+        return "Public Root";
+    }
 }

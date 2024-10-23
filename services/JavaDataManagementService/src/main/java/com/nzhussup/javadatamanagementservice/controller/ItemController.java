@@ -24,7 +24,7 @@ public class ItemController {
         return response;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String root() {
         return "Item root";
     }

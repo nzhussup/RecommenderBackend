@@ -28,7 +28,7 @@ public class UserController {
         return response;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String root() {
         return "User root";
     }

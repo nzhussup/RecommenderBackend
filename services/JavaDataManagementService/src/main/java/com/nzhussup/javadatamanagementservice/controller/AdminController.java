@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("admin/")
+@RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class AdminController {
         return response;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String index() {
         return "Admin root";
     }
