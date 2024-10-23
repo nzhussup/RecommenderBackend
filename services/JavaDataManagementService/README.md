@@ -10,12 +10,15 @@ The `JavaDataManagementService` is a RESTful API developed using **Spring Boot**
 - REST API built with **Spring Boot**
 - Integration with **PostgreSQL** database
 - Dockerized for containerized deployments
+- Spring Security with JWT
+- Role-Based access control implementing public and admin endpoints
 
 #### Tech Stack
 
 - Java
 - Spring Boot
 - Spring Web
+- Spring Security
 - Spring JDBC
 - PostgreSQL
 - Docker

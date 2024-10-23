@@ -49,6 +49,7 @@ The repository is organized into the following sections:
 │       ├── docker-image-apiService.yml        # CI/CD for Python API service
 │       ├── docker-image-javaApiService.yml    # CI/CD for Java API service
 │       └── docker-image-modelApiService.yml   # CI/CD for Model API service
+│       └── docker-image-db.yml                # CI/CD for Database
 │       └── testpypi-modeltrain.yml            # CI/CD for Model Package
 ├── db                           # Database initialization and Docker setup for database service
 │   ├── Dockerfile               # Dockerfile for the database service
@@ -74,6 +75,7 @@ The CI/CD pipeline is configured using **GitHub Actions**. The `.github/workflow
 - **docker-image-apiService.yml**: Automates the build and push of Docker images for the Python API service.
 - **docker-image-javaApiService.yml**: Automates the build and push of Docker images for the Java-based data management service.
 - **docker-image-modelApiService.yml**: Automates the build and push of Docker images for the model API service.
+- **docker-image-db.yml**: Automates the build and push of Docker images for the Database
 - **testpypi-modeltrain.yml**: Automates the testing, build and push of "Model Train" Python package.
 
 The pipeline is triggered on new commits to the corresponding folder in the services folder. Each service workflow ensures that the corresponding Docker image is built, tested, and deployed to a container registry if all tests pass.
